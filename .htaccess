@@ -1,0 +1,15 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# Удаляем .php из URL
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^.]+)$ $1.php [L,QSA]
+
+# Если файл или директория не существуют, перенаправляем на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} ^style.css
+RewriteRule . index.php [L]
+
+# Установка кастомной страницы 404
+ErrorDocument 404 /404.php
